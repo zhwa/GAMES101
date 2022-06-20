@@ -240,6 +240,7 @@ void Renderer::Render(const Scene& scene)
             float nx = (i + 0.5f) * 2 / scene.width - 1.0f;
             float ny = (j + 0.5f) * 2 / scene.height - 1.0f;
 
+            // The following code piece is based on https://github.com/Quanwei1992/GAMES101/blob/master/05/Renderer.cpp
             // NDC space to world space
 
             // Project matrix
