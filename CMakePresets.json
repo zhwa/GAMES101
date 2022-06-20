@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "x64-release",
+            "displayName": "x64 Release",
+            "description": "For GAMES101, only release mode is necessary",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}",
+            "generator": "Visual Studio 17 2022",
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [ "Windows" ]
+                },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            },
+            "architecture": {
+                "value": "x64",
+                "strategy": "set"
+            }
+        }
+    ]
+}
