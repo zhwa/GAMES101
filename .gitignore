@@ -369,6 +369,5 @@ out/
 bin/
 .vs/
 *.lib
-*.obj
 *.dll
 *.exe
