@@ -9,15 +9,16 @@
             "installDir": "${sourceDir}/out/install/${presetName}",
             "generator": "Visual Studio 17 2022",
             "vendor": {
-                "microsoft.com/VisualStudioSettings/CMake/1.0": {
-                    "hostOS": [ "Windows" ]
-                },
+              "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                "hostOS": [ "Windows" ]
+              }
+            },
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo"
             },
             "architecture": {
-                "value": "x64",
-                "strategy": "set"
+              "value": "x64",
+              "strategy": "set"
             }
         }
     ]
