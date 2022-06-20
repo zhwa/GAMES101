@@ -108,7 +108,23 @@ Intersection BVHAccel::Intersect(const Ray& ray) const
 Intersection BVHAccel::getIntersection(BVHBuildNode* node, const Ray& ray) const
 {
     // TODO Traverse the BVH to find intersection
-    return {};
+    // WAZH: do not set obj here: isect.obj = node->object; instead, set the triangle as the obj
+    Intersection isect;
+    if (!node->bounds.IntersectP(ray, ray.direction_inv))
+    {
+        return isect;
+    }
+    if (!node->left && !node->right)
+    {
+        isect = node->object->getIntersection(ray);
+    }
+    else
+    {
+        auto left_sect = getIntersection(node->left, ray);
+        auto right_sect = getIntersection(node->right, ray);
+        isect = left_sect.distance < right_sect.distance ? left_sect : right_sect;
+    }
+    return isect;
 }
 
 

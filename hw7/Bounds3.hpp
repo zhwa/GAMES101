@@ -80,19 +80,48 @@ class Bounds3
         return (i == 0) ? pMin : pMax;
     }
 
-    inline bool IntersectP(const Ray& ray, const Vector3f& invDir,
-                           const std::array<int, 3>& dirisNeg) const;
+    inline bool IntersectP(const Ray& ray, const Vector3f& invDir) const;
 };
 
 
-
-inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
-                                const std::array<int, 3>& dirIsNeg) const
+inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir) const
 {
     // invDir: ray direction(x,y,z), invDir=(1.0/x,1.0/y,1.0/z), use this because Multiply is faster that Division
     // dirIsNeg: ray direction(x,y,z), dirIsNeg=[int(x>0),int(y>0),int(z>0)], use this to simplify your logic
     // TODO test if ray bound intersects
-
+    float t_enter{ std::numeric_limits<float>::lowest() };
+    float t_exit{ std::numeric_limits<float>::max() };
+    if (ray.direction.x > 0)
+    {
+        t_enter = std::max(t_enter, (pMin.x - ray.origin.x) * ray.direction_inv.x);
+        t_exit = std::min(t_exit, (pMax.x - ray.origin.x) * ray.direction_inv.x);
+    }
+    else
+    {
+        t_enter = std::max(t_enter, (pMax.x - ray.origin.x) * ray.direction_inv.x);
+        t_exit = std::min(t_exit, (pMin.x - ray.origin.x) * ray.direction_inv.x);
+    }
+    if (ray.direction.y > 0)
+    {
+        t_enter = std::max(t_enter, (pMin.y - ray.origin.y) * ray.direction_inv.y);
+        t_exit = std::min(t_exit, (pMax.y - ray.origin.y) * ray.direction_inv.y);
+    }
+    else
+    {
+        t_enter = std::max(t_enter, (pMax.y - ray.origin.y) * ray.direction_inv.y);
+        t_exit = std::min(t_exit, (pMin.y - ray.origin.y) * ray.direction_inv.y);
+    }
+    if (ray.direction.z > 0)
+    {
+        t_enter = std::max(t_enter, (pMin.z - ray.origin.z) * ray.direction_inv.z);
+        t_exit = std::min(t_exit, (pMax.z - ray.origin.z) * ray.direction_inv.z);
+    }
+    else
+    {
+        t_enter = std::max(t_enter, (pMax.z - ray.origin.z) * ray.direction_inv.z);
+        t_exit = std::min(t_exit, (pMin.z - ray.origin.z) * ray.direction_inv.z);
+    }
+    return t_enter <= t_exit && t_exit >= 0;
 }
 
 inline Bounds3 Union(const Bounds3& b1, const Bounds3& b2)
