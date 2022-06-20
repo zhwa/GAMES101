@@ -8,5 +8,10 @@ Alternatively, run the following commands to create the traditional VS project:
 ```sh
 mkdir build
 cd build
-cmake -S .. -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake -S .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=RelWithDebInfo
 ```
+
+References:
+
+* https://github.com/kingiluob/Games101
+* https://github.com/Quanwei1992/GAMES101
