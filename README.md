@@ -1,2 +1,1 @@
-# GAMES101
-Homework code for GAMES101, Windows Only
+This repo contains source code for GAMES101 homeworks. It can only be built with latest VS2022 under release mode.
